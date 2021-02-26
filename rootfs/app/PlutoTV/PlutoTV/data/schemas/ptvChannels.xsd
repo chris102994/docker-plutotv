@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+  <xs:element name="AVOD" type="xs:boolean"/>
+  <xs:element name="category" type="xs:string"/>
+  <xs:element name="chatEnabled" type="xs:boolean"/>
+  <xs:element name="chatRoomId" type="xs:byte"/>
+  <xs:element name="cohortMask" type="xs:short"/>
+  <xs:element name="description" type="xs:string"/>
+  <xs:element name="directOnly" type="xs:boolean"/>
+  <xs:element name="displayName" type="xs:string"/>
+  <xs:element name="duration" type="xs:int"/>
+  <xs:element name="favorite" type="xs:boolean"/>
+  <xs:element name="featured" type="xs:boolean"/>
+  <xs:element name="featuredOrder" type="xs:byte"/>
+  <xs:element name="firstAired" type="xs:dateTime"/>
+  <xs:element name="genre" type="xs:string"/>
+  <xs:element name="hash" type="xs:string"/>
+  <xs:element name="isStitched" type="xs:boolean"/>
+  <xs:element name="liveBroadcast" type="xs:boolean"/>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="number" type="xs:short"/>
+  <xs:element name="onDemand" type="xs:boolean"/>
+  <xs:element name="onDemandDescription" type="xs:string"/>
+  <xs:element name="originalContentDuration" type="xs:int"/>
+  <xs:element name="originalReleaseDate" type="xs:dateTime"/>
+  <xs:element name="path" type="xs:anyURI"/>
+  <xs:element name="plutoOfficeOnly" type="xs:boolean"/>
+  <xs:element name="rating" type="xs:string"/>
+  <xs:element name="sessionURL" type="xs:anyURI"/>
+  <xs:element name="start" type="xs:dateTime"/>
+  <xs:element name="stop" type="xs:dateTime"/>
+  <xs:element name="subGenre" type="xs:string"/>
+  <xs:element name="slug" type="xs:string"/>
+  <xs:element name="summary" type="xs:string"/>
+  <xs:element name="title" type="xs:string"/>
+  <xs:element name="tmsid" type="xs:int"/>
+  <xs:element name="url" type="xs:anyURI"/>
+  <xs:element name="visibility" type="xs:string"/>
+  <xs:element name="_id" type="xs:string"/>
+
+  <xs:element name="type">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="film"/>
+        <xs:enumeration value="hls"/>
+        <xs:enumeration value="live"/>
+        <xs:enumeration value="music-video"/>
+        <xs:enumeration value="No information available"/>
+        <xs:enumeration value="tv"/>
+        <xs:enumeration value="web-original"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="urls">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="type" minOccurs="0"/>
+        <xs:element ref="url" minOccurs="0"/>
+        <xs:element ref="urls" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="tile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="path"/>
+        <xs:element ref="title" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="featuredImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="path"/>
+        <xs:element ref="title" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="distributeAs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="AVOD"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="clip">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="originalReleaseDate"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="poster">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="path"/>
+        <xs:element ref="title" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="thumbnail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="path"/>
+        <xs:element ref="title" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="series">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description"/>
+        <xs:element ref="displayName" minOccurs="0"/>
+        <xs:element ref="featuredImage"/>
+        <xs:element ref="name"/>
+        <xs:element ref="slug"/>
+        <xs:element ref="summary"/>
+        <xs:element ref="tile"/>
+        <xs:element ref="type"/>
+        <xs:element ref="_id"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="episode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="clip"/>
+        <xs:element ref="description"/>
+        <xs:element ref="distributeAs"/>
+        <xs:element ref="duration"/>
+        <xs:element ref="featuredImage" minOccurs="0"/>
+        <xs:element ref="firstAired"/>
+        <xs:element ref="genre"/>
+        <xs:element ref="liveBroadcast"/>
+        <xs:element ref="name"/>
+        <xs:element ref="number"/>
+        <xs:element ref="originalContentDuration"/>
+        <xs:element ref="poster"/>
+        <xs:element ref="rating"/>
+        <xs:element ref="series"/>
+        <xs:element ref="slug"/>
+        <xs:element ref="subGenre"/>
+        <xs:element ref="thumbnail"/>
+        <xs:element ref="_id"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="timelines">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="episode" minOccurs="0"/>
+        <xs:element ref="start" minOccurs="0"/>
+        <xs:element ref="stop" minOccurs="0"/>
+        <xs:element ref="timelines" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element ref="title" minOccurs="0"/>
+        <xs:element ref="_id" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="logo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="path"/>
+        <xs:element ref="title" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="colorLogoSVG">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="path"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="colorLogoPNG">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="path"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="solidLogoSVG">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="path"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="solidLogoPNG">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="path"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="stitched">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="urls"/>
+        <xs:element ref="sessionURL"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="element">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="category" minOccurs="0"/>
+        <xs:element ref="chatEnabled" minOccurs="0"/>
+        <xs:element ref="chatRoomId" minOccurs="0"/>
+        <xs:element ref="cohortMask" minOccurs="0"/>
+        <xs:element ref="colorLogoSVG" minOccurs="0"/>
+        <xs:element ref="colorLogoPNG" minOccurs="0"/>
+        <xs:element ref="directOnly" minOccurs="0"/>
+        <xs:element ref="element" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element ref="favorite" minOccurs="0"/>
+        <xs:element ref="featured" minOccurs="0"/>
+        <xs:element ref="featuredOrder" minOccurs="0"/>
+        <xs:element ref="featuredImage" minOccurs="0"/>
+        <xs:element ref="hash" minOccurs="0"/>
+        <xs:element ref="isStitched" minOccurs="0"/>
+        <xs:element ref="name" minOccurs="0"/>
+        <xs:element ref="number" minOccurs="0"/>
+        <xs:element ref="onDemand" minOccurs="0"/>
+        <xs:element ref="onDemandDescription" minOccurs="0"/>
+        <xs:element ref="plutoOfficeOnly" minOccurs="0"/>
+        <xs:element ref="slug" minOccurs="0"/>
+        <xs:element ref="solidLogoPNG" minOccurs="0"/>
+        <xs:element ref="solidLogoSVG" minOccurs="0"/>
+        <xs:element ref="stitched" minOccurs="0"/>
+        <xs:element ref="summary" minOccurs="0"/>
+        <xs:element ref="thumbnail" minOccurs="0"/>
+        <xs:element ref="tile" minOccurs="0"/>
+        <xs:element ref="logo" minOccurs="0"/>
+        <xs:element ref="timelines" minOccurs="0"/>
+        <xs:element ref="tmsid" minOccurs="0"/>
+        <xs:element ref="visibility" minOccurs="0"/>
+        <xs:element ref="_id" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="root">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="element" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

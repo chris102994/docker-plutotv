@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+
+set -u # Unset Variables are an error
+set -e # Exit on error
+
+cp /defaults/index.html /data/PlutoTV/
+
+# Initial Run
+/app/ptv-wrapper.sh

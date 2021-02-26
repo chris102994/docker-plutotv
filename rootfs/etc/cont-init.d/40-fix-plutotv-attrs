@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv bash
+
+set -u # Unset Variables are an error
+set -e # Exit on error
+
+# Ensure Data folder Exists
+DATA_PATH='/data/PlutoTV'
+if [ ! -d $DATA_PATH ]; then
+	echo "First boot with mounted /data/PlutoTV detected."
+	mkdir -p $DATA_PATH
+fi
+
+chown -R 900:900 $DATA_PATH
+chmod -R 0755 $DATA_PATH
+
+chmod +x /app/ptv-wrapper.sh

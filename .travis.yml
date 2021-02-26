@@ -1,0 +1,45 @@
+#
+# Travis CI recipe to build, test and push docker images to the Docker Hub.
+#
+
+language: generic
+
+os:
+  - linux
+
+services:
+  - docker
+
+git:
+  submodules: false
+
+jobs:
+  include:
+  - stage: Ubuntu Container
+    script:
+      - git submodule update --init --remote
+      - |
+        tools/build/build_container.sh \
+        --envfile versions/ubuntu-18.env \
+        --envfile versions/docker-plutotv.env \
+        --build \
+        --pushdr
+
+
+  - stage: Docker Testing
+    script: 
+      - git submodule update --init --remote
+      - |
+        tools/build/build_container.sh \
+        --envfile versions/docker-plutotv.env \
+        --testc
+
+  - stage: Git Tag & Docker Hub README
+    script: 
+      - git submodule update --init --remote
+      - |
+        tools/build/build_container.sh \
+        --envfile versions/docker-plutotv.env \
+        --pushgt \
+        --pushrm
+
