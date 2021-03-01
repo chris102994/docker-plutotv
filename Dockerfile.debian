@@ -31,7 +31,7 @@ RUN    echo "##### Downloading Runtime Packages #####" && \
         yes | python3 -m pip uninstall wheel setuptools && \
 	echo "##### Cron setup #####" && \
 		# Execute the cron job every 2 hours at 15 mins after.
-		echo "0	*/12	*	*	*	root /app/ta-wrapper.sh" >> /etc/crontab && \
+		echo "0	*/8	*	*	*	root /app/ta-wrapper.sh" >> /etc/crontab && \
     echo "##### Removing Unnecessary NGINX Files#####" && \
         rm -rf \
             /etc/init.d/* \

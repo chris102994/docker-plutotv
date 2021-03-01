@@ -20,7 +20,6 @@ from xsdata.formats.dataclass.parsers import XmlParser
 from xsdata.models.xsd import Any
 
 from PlutoTV import ptvChannels
-import ssl
 import urllib
 from urllib.request import urlopen
 
@@ -60,10 +59,12 @@ class PlutoTv:
     TV_OBJECT: xmltv.Tv
 
     def main(self):
+        _start_time = datetime.now().replace(minute=0, second=0, microsecond=0)
+        _stop_time = _start_time + timedelta(days=1)
         self.GUIDE_URL =\
             self.GUIDE_URL + \
-            '?start={}'.format(self.get_proper_date_time(datetime.today(), _URL_TIME_FORMAT)) + \
-            '&stop={}'.format(self.get_proper_date_time(datetime.today() + timedelta(days=1), _URL_TIME_FORMAT)) + \
+            '?start={}'.format(self.get_proper_date_time(_start_time, _URL_TIME_FORMAT)) + \
+            '&stop={}'.format(self.get_proper_date_time(_stop_time, _URL_TIME_FORMAT)) + \
             '&appName={}'.format('web') + \
             '&appVersion={}'.format('unknown') + \
             '&appStoreUrl={}'.format('unknown') + \
