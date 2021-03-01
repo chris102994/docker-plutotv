@@ -60,7 +60,7 @@ class PlutoTv:
 
     def main(self):
         _start_time = datetime.now().replace(minute=0, second=0, microsecond=0)
-        _stop_time = _start_time + timedelta(days=1)
+        _stop_time = _start_time + timedelta(days=2)
         self.GUIDE_URL =\
             self.GUIDE_URL + \
             '?start={}'.format(self.get_proper_date_time(_start_time, _URL_TIME_FORMAT)) + \
