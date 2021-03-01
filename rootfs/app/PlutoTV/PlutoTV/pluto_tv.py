@@ -138,7 +138,6 @@ class PlutoTv:
                         _category.append(Category(content=[ptv_prog.episode.genre], lang=_lang))
                     if ptv_prog.episode.subGenre is not None:
                         _category.append(Category(content=[ptv_prog.episode.subGenre], lang=_lang))
-
                 self.TV_OBJECT.programme.append(
                     Programme(
                         category=_category,
@@ -147,7 +146,7 @@ class PlutoTv:
                         date=ptv_prog.episode.firstAired,
                         desc=[Desc(content=[ptv_prog.episode.description], lang=_lang)],
                         episode_num=[EpisodeNum(content=[ptv_prog.episode.number], system='onscreen')],
-                        icon=[Icon(src=ptv_prog.episode.thumbnail.path)],
+                        icon=[Icon(src=ptv_prog.episode.series.tile.path)],
                         language=Language(content=[_lang], lang=_lang),
                         rating=_rating,
                         start=self.get_proper_date_time(date_time_string=str(ptv_prog.start), new_format=_NEW_DATE_FORMAT_NO_TZ),
