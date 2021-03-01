@@ -12,7 +12,7 @@
 
 Pluto TV licenses its content directly from providers, and as of March 2020 has deals with 170 content partners providing more than 250 channels and 100,000 unique hours worth of programming. Its content is available via its website and supported apps.
 
-This is a simple project that scrapes the website and generates an M3U playlist every 12 hours along with a XMLTV object that is hosted over NGINX.
+This is a simple project that scrapes the website and generates an M3U playlist every 8 hours along with a XMLTV object that is hosted over NGINX.
 
 The XMLTV and M3U playlist can be directly imported to Emby or Plex. Or if you'd like a buffer you can also import them into xteve or tvheadend. 
 
