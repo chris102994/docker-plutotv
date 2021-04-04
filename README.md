@@ -1,8 +1,3 @@
- File              : README.md
- Author            : Chris <chris102994@yahoo.com>
- Date              : 04.04.2021
- Last Modified Date: 04.04.2021
- Last Modified By  : Chris <chris102994@yahoo.com>
 ## [chris102994/docker-plutotv](https://github.com/chris102994/docker-plutotv)
 
 [![https://www.pluto.tv/](https://pluto.tv/assets/images/og-logo-v5.png)](https://www.pluto.tv/)
