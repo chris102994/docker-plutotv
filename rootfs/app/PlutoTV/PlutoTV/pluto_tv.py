@@ -22,6 +22,7 @@ from xsdata.models.xsd import Any
 from PlutoTV import ptvChannels
 import urllib
 from urllib.request import urlopen
+from jinja2 import Template
 
 dicttoxml.LOG.setLevel(logging.ERROR)
 
@@ -163,24 +164,18 @@ class PlutoTv:
         """
         Method that writes the loaded channels to an M3U file of your choosing.
         """
+        m3u_template = Template("""#EXTM3U
+        {%- for channel in channels -%}
+        {% if channel.url is not none %}
+#EXTINF:-0 channel-id="{{ channel.id }}" tvg-name="{{ channel.display_name[0].content[0] }}" tvg-id"{{ channel.display_name[0].content[0] }}" tvg-logo="{{ channel.icon[0].src }}" group-title="PlutoTV", {{ channel.display_name[0].content[0] }}
+{{ channel.url[0] }}
+        {% endif %}
+        {%- endfor -%}
+        """).render(
+            channels=self.TV_OBJECT.channel
+        )
         self.LOGGER.debug('Writing channels to {}.'.format(m3u_out_file))
-        m3u_text = '#EXTM3U\n'
-        for channel in self.TV_OBJECT.channel:
-            if channel.url is not None:
-                channel_text = '\n#EXTINF:-0 channel-id="{}" tvg-name="{}" tvg-id"{}" tvg-logo="{}" group-title="{}", {}\n{}\n' \
-                    .format(
-                        channel.id,
-                        channel.display_name[0].content[0],
-                        channel.display_name[0].content[0],
-                        channel.icon[0].src,
-                        'PlutoTV',
-                        channel.display_name[0].content[0],
-                        channel.url[0]
-                    )
-                m3u_text += channel_text
-            else:
-                self.LOGGER.debug('Unable to generate a guide object for {} because it doesn\'t have a url.'.format(channel.display_name[0].content[0]))
-        open(m3u_out_file, 'w').write(m3u_text)
+        open(m3u_out_file, 'w').write(m3u_template)
 
     def get_json_obj_from_url(self, json_url: str):
         """
