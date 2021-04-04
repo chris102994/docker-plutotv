@@ -61,26 +61,28 @@ class PlutoTv:
     def main(self):
         _start_time = datetime.now().replace(minute=0, second=0, microsecond=0)
         _stop_time = _start_time + timedelta(days=2)
-        self.GUIDE_URL =\
-            self.GUIDE_URL + \
-            '?start={}'.format(self.get_proper_date_time(_start_time, _URL_TIME_FORMAT)) + \
-            '&stop={}'.format(self.get_proper_date_time(_stop_time, _URL_TIME_FORMAT)) + \
-            '&appName={}'.format('web') + \
-            '&appVersion={}'.format('unknown') + \
-            '&appStoreUrl={}'.format('unknown') + \
-            '&architecture={}'.format(platform.machine()) + \
-            '&buildVersion={}'.format('unknown') + \
-            '&clientTime={}'.format(0) + \
-            '&deviceDNT={}'.format(0) + \
-            '&deviceId={}'.format(uuid.uuid1()) + \
-            '&deviceMake={}'.format('Chrome') + \
-            '&deviceModel={}'.format('web') + \
-            '&deviceType={}'.format('web') + \
-            '&deviceVersion='.format('unknown') + \
-            '&includeExtendedEvents={}'.format('false') + \
-            '&sid={}'.format(uuid.uuid4()) + \
-            '&userId={}'.format('') + \
-            '&serverSideAds={}'.format('true')
+        _API_ARGS = {
+            'start': self.get_proper_date_time(_start_time, _URL_TIME_FORMAT),
+            'stop': self.get_proper_date_time(_stop_time, _URL_TIME_FORMAT),
+            'appName': 'web',
+            'appVersion': 'unknown',
+            'appStoreUrl': 'unknown',
+            'architecture': platform.machine(),
+            'buildVersion': 'unknown',
+            'clientTime': 0,
+            'deviceDNT': 0,
+            'deviceId': uuid.uuid1(),
+            'deviceMake': 'Chrome',
+            'deviceModel': 'web',
+            'deviceType': 'web',
+            'deviceVersion': 'unknown',
+            'includeExtendedEvents': False,
+            'sid': uuid.uuid4(),
+            'userId': os.getenv('PLUTO_USER_ID', ''),
+            'serverSideAds': True
+        }
+
+        self.GUIDE_URL = '{}?{}'.format(self.GUIDE_URL, urllib.parse.urlencode(_API_ARGS))
 
         self.TV_OBJECT = xmltv.Tv(
             date=str(date.today()),
@@ -107,7 +109,6 @@ class PlutoTv:
             xml_file_path=pathlib.Path(self.xmltv_file_name),
             serialize_clazz=self.TV_OBJECT
         )
-
 
     def adapt_ptv_object_to_xmltv_object(self):
         """
@@ -157,7 +158,6 @@ class PlutoTv:
                         url=_url
                     )
                 )
-
 
     def write_to_m3u_file(self, m3u_out_file: str):
         """
@@ -316,6 +316,7 @@ class CustomStringConverter(Converter):
 converter.register_converter(bool, CustomBoolConverter())
 converter.register_converter(type(Enum), CustomEnumConverter())
 converter.register_converter(str, CustomStringConverter())
+
 
 def main():
     ptv = PlutoTv()

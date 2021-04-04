@@ -1,3 +1,8 @@
+ File              : README.md
+ Author            : Chris <chris102994@yahoo.com>
+ Date              : 04.04.2021
+ Last Modified Date: 04.04.2021
+ Last Modified By  : Chris <chris102994@yahoo.com>
 ## [chris102994/docker-plutotv](https://github.com/chris102994/docker-plutotv)
 
 [![https://www.pluto.tv/](https://pluto.tv/assets/images/og-logo-v5.png)](https://www.pluto.tv/)
@@ -38,8 +43,8 @@ Container specific parameters passed at runtime. The format is `<external>:<inte
 | -e GROUPNAME | The Groupname you wish to run as. (Optional) |
 | -e PUID | The UID you wish to run and save files as. (Optional) |
 | -e PGID | The GID you wish to run and save files as. (Optional) |
-| -e LOG_LEVEL | The Python Logging log level for the PTV Scraper. (Default ERROR) |
-
+| -e LOG_LEVEL | The Python Logging log level for the PTV Scraper. (Default: ERROR) |
+| -e PLUTO_USER_ID | Your Pluto User ID. (Default: None) |
 ## Application Setup
 
 The basic index is available at `http://<ip>:<port>/`
