@@ -135,7 +135,6 @@ class PlutoTv:
             for ptv_prog in ptv_chan.timelines.timelines:
                 if ptv_prog.episode.rating is not None:
                     _rating = [xmltv_helpers.get_rating_object(ptv_prog.episode.rating)]
-                    print('Got rating!', ptv_prog.episode.rating, _rating)
                 if ptv_prog.episode.genre is not None or ptv_prog.episode.subGenre is not None:
                     _category = []
                     if ptv_prog.episode.genre is not None:
